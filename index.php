@@ -59,6 +59,21 @@
 
 			})
 
+			//如果用POST方法，api.php也要相应更改成_POST方法
+			// $("#ajaxbtn").click(function(){
+			// 	var i_name = $("input[name='name']").val();
+			// 	$.ajax({
+			// 		url:"api.php",
+			// 		data:{name:i_name},
+			// 		type:"POST",
+			// 		dataType:"json",
+			// 		success:function(data){
+			// 			$("h3").text(data.data);
+			// 		}
+			// 	})
+
+			// })
+
 
 
 			
