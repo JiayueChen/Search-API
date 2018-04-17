@@ -8,7 +8,7 @@ function get_price($name) {
 	];
 
 	foreach ($products as $product => $price) {
-		if ($product = $name) {
+		if ($product == $name) {
 			return $price;
 			break;
 		}

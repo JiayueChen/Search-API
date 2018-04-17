@@ -17,7 +17,7 @@
 				<label for="name">Name</label>
 				<input type="text" name="name" class="form-control"  placeholder="Enter Product Name" required/>
 			</div>
-			<button type="submit" name="submit" class="btn btn-default">Submit</button>
+			<button type="submit" name="submit" class="btn btn-default">Curl submit</button>
 			<button type="button" id="ajaxbtn" class="btn btn-default">Ajax submit</button>
 			
 		</form>
@@ -29,9 +29,9 @@
 			{
 				$name = $_POST['name'];
 
-				// $url = "192.168.33.10/API/api.php?name=".$name;
+				$url = "192.168.33.10/API/api.php?name=".$name;
 				//添加了.htaccess文件可以使用下面这种
-				$url = "192.168.33.10/API/api/".$name;
+				// $url = "192.168.33.10/API/api/".$name;
 
 				$client = curl_init($url);
 				curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
@@ -74,9 +74,6 @@
 
 			// })
 
-
-
-			
 		});
 	</script>
 </body>
