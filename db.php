@@ -44,8 +44,8 @@ class DBConnection {
 	}
 }
 
- $db = new DBConnection();
-var_dump($db->getProductByName("book"));
+//  $db = new DBConnection();
+// var_dump($db->getProductByName("pen"));
 
 
  ?>
