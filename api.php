@@ -27,6 +27,8 @@ if (!empty($_GET['name'])) {
 	//db.php方法
 	$db = new DBConnection();
     $price = $db->getProductPriceByName($name);
+
+    // $search =$db->getProductInfoById($name);
 	
 
 	if (empty($price)) {
@@ -43,8 +45,16 @@ if (!empty($_GET['name'])) {
 //查 api/product/{id}
 //改 api/update/{id}/{new_quantity}
 //删 api/delete/{id}
-$name = $_GET['name'];
-$param_array = explode('/', $name);
+// if($_REQUEST['action']='add') {
+// 	$name = $_REQUEST['name'];
+// 	$quantity = $_REQUEST['quantity']
+
+// 	$db = new DBConnection();
+//     $price = $db->getProductPriceByName($name);
+// }
+// elseif (condition) {
+// 	# code...
+// }
 
 
 

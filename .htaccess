@@ -1,3 +1,8 @@
 RewriteEngine on  #Turn on the rewriting engine
 
 RewriteRule ^api/([a-zA-Z_-]*)$ api.php?name=$1 [NC,L]
+
+RewriteRule ^api/add/([a-zA-Z_-]*)/([0-9]*)$ api_db.php?acition=add&name=$1&quantity=$2 [NC,L]
+RewriteRule ^api/product/([0-9]*)$ api_db.php?acition=product&id=$1 [NC,L]
+RewriteRule ^api/update/([0-9]*)/([0-9]*)$ api_db.php?acition=update&id=$1&quantity=$2 [NC,L]
+RewriteRule ^api/delete/([0-9]*)$ api_db.php?acition=delete&id=$1 [NC,L]

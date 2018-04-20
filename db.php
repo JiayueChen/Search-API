@@ -90,9 +90,9 @@ class DBConnection {
 	}
 }
 
- $db = new DBConnection();
+// $db = new DBConnection();
 // var_dump($db->getProductByName("pen"));
- var_dump($db->addProduct("book",3));
+// var_dump($db->addProduct("book",3));
 
 
 
