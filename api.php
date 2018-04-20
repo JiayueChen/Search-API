@@ -1,6 +1,10 @@
 <?php 
 header("Content-Type:application/json");
-require_once "data.php";
+// 请求data数据文件
+// require_once "data.php";
+
+// 请求数据库
+require_once "db.php";
 
 function response($status,$status_message,$data){
 	header("HTTP/1.1 ".$status);
@@ -17,7 +21,13 @@ function response($status,$status_message,$data){
 	//	前端写的name是否为空
 if (!empty($_GET['name'])) {
 	$name = $_GET['name'];
-	$price = get_price($name);
+	//data.php 的get_price方法
+	// $price = get_price($name);
+
+	//db.php方法
+	$db = new DBConnection();
+    $price = $db->getProductByName($name);
+	
 
 	if (empty($price)) {
 		response(200, "Product Not Found", NULL);
