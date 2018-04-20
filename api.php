@@ -26,7 +26,7 @@ if (!empty($_GET['name'])) {
 
 	//db.php方法
 	$db = new DBConnection();
-    $price = $db->getProductByName($name);
+    $price = $db->getProductPriceByName($name);
 	
 
 	if (empty($price)) {
@@ -37,6 +37,15 @@ if (!empty($_GET['name'])) {
 } else {
 	response(400, "Invalid Request", NULL);
 }
+
+
+//增 api/add/{name}/{quantity}
+//查 api/product/{id}
+//改 api/update/{id}/{new_quantity}
+//删 api/delete/{id}
+$name = $_GET['name'];
+$param_array = explode('/', $name);
+
 
 
 ?>

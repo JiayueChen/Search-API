@@ -10,25 +10,11 @@ class DBConnection {
 		return $this->connection;
 	}
 
-	// public function addTemplate($content, $name, $vars) {
-	// 	// TODO: Add Check - content,name,vars
-
-	// 	// Add to DB
-	// 	// 列名和数据库对应 templates(tcontent)
-	// 	$stmt = $this->getConnInstant()->prepare("INSERT into templates(tcontent, tname, tvar) VALUES(:content, :name, :vars)");
-	// 	$result = $stmt->execute(
-	// 		array(
-	// 			':content' => $content,
-	// 			':name' => $name,
-	// 			':vars' => $vars
-	// 		)
-	// 	);
-	// 	return $result;
-	// }
+	
 
 	
 
-	public function getProductByName($name) {
+	public function getProductPriceByName($name) {
 		$stmt = $this->getConnInstant()->prepare("SELECT * FROM product WHERE (name = :name)");
 		$stmt->execute(
 			array(
@@ -39,13 +25,75 @@ class DBConnection {
 		$result = $stmt->fetch();
 		
 		return $result["price"];
-		
 
+
+	}
+
+
+	//增 api/add/{name}/{quantity}
+	public function addProduct($name, $quantity) {
+		// TODO: Add Check - content,name,vars
+
+		// Add to DB
+		// 列名和数据库对应 product(name)
+		$stmt = $this->getConnInstant()->prepare("INSERT into product(name, quantity) VALUES(:name, :quantity)");
+		$result = $stmt->execute(
+			array(
+				':name' => $name,
+				':quantity' => $quantity
+			)
+		);
+		return $result;
+	}
+
+	//查 api/product/{id}
+	public function getProductInfoById($id) {
+		$stmt = $this->getConnInstant()->prepare("SELECT * FROM product WHERE (id = :id)");
+		$result = $stmt->execute(
+			array(
+				':id'=> $id,
+			)
+		);
+		//fetch 配合搜索结果，取回结果
+		$info = $stmt->fetch();
+		$result = array(
+			'id' => $info['id'],
+			'name' => $info['name'],
+			'price' => $info['price'],
+			'quantity' => $info['quantity'],
+		);
+
+		return $result;
+	}
+
+	//改 api/update/{id}/{new_quantity}
+	public function updateQuantityById($id, $new_quantity) {
+		$stmt = $this->getConnInstant()->prepare("UPDATE product SET quantity = :quantity WHERE (id = :id)");
+		$result = $stmt->execute(
+			array(
+				':quantity'=> $new_quantity,
+				':id'=> $id,
+			)
+		);
+		return $result;
+	}
+
+	//删 api/delete/{id}
+	public function deleteById($id) {
+		$stmt = $this->getConnInstant()->prepare("DELETE FROM product WHERE (id = :id)");
+		$result = $stmt->execute(
+			array(
+				':id'=> $id,
+			)
+		);
+		return $result;
 	}
 }
 
-//  $db = new DBConnection();
+ $db = new DBConnection();
 // var_dump($db->getProductByName("pen"));
+ var_dump($db->addProduct("book",3));
+
 
 
  ?>
