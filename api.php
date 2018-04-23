@@ -45,14 +45,15 @@ if (!empty($_GET['name'])) {
 //查 api/product/{id}
 //改 api/update/{id}/{new_quantity}
 //删 api/delete/{id}
-// if($_REQUEST['action']='add') {
-// 	$name = $_REQUEST['name'];
-// 	$quantity = $_REQUEST['quantity']
+if($_REQUEST['action']='add') {
+	$name = $_REQUEST['name'];
+	$quantity = $_REQUEST['quantity'];
 
-// 	$db = new DBConnection();
-//     $price = $db->getProductPriceByName($name);
-// }
-// elseif (condition) {
+	$db = new DBConnection();
+    $result = $db->addProduct($name,$quantity);
+    response(200,"add product",$result);
+}
+// elseif ($_REQUEST[]) {
 // 	# code...
 // }
 
