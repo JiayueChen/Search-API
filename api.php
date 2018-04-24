@@ -18,7 +18,7 @@ function response($status,$status_message,$data){
 	echo $json_response;
 }
 
-	//	前端写的name是否为空
+		前端写的name是否为空
 if (!empty($_GET['name'])) {
 	$name = $_GET['name'];
 	//data.php 的get_price方法
@@ -28,8 +28,6 @@ if (!empty($_GET['name'])) {
 	$db = new DBConnection();
     $price = $db->getProductPriceByName($name);
 
-    // $search =$db->getProductInfoById($name);
-	
 
 	if (empty($price)) {
 		response(200, "Product Not Found", NULL);
@@ -45,17 +43,30 @@ if (!empty($_GET['name'])) {
 //查 api/product/{id}
 //改 api/update/{id}/{new_quantity}
 //删 api/delete/{id}
-if($_REQUEST['action']='add') {
-	$name = $_REQUEST['name'];
-	$quantity = $_REQUEST['quantity'];
+// if($_REQUEST['action']=='add') {
+// 	$name = $_REQUEST['name'];
+// 	$quantity = $_REQUEST['quantity'];
 
-	$db = new DBConnection();
-    $result = $db->addProduct($name,$quantity);
-    response(200,"add product",$result);
-}
-// elseif ($_REQUEST[]) {
-// 	# code...
+// 	$db = new DBConnection();
+//     $result = $db->addProduct($name,$quantity);
+//     echo "add". $name;
 // }
+
+if($_REQUEST['action']=="add"&&!empty($_REQUEST['name'])&&!empty($_REQUEST['quantity']))
+{
+	$name=$_REQUEST['name'];
+	$quantity=$_REQUEST['quantity'];
+	try{
+		$db = new DBConnection();
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$stmt = $db->addProduct($name,$quantity);
+
+	    $insert_res = $stmt->rowCount();
+	    echo $insert_res." record(s) added.";
+	}catch(PDOException $e){
+		echo "Connection failed: " . $e->getMessage();
+	}
+}
 
 
 
